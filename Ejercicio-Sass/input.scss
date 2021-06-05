@@ -1,0 +1,68 @@
+// Creando variables
+// $primary-color:#433A3F;
+// $light-blue:#3D5A6C;
+// $light-green:#72A98F;
+// $white:#b8b8b8;
+
+
+// body {
+//     font-family: 'Times New Roman', Times, serif;
+//     width: 900px;
+//     height: 900px;
+//     margin: 0 auto;
+//     padding: 50px;
+//     background-color: $primary-color;
+//     color: $white;
+
+//     * {
+//         border-radius: 3px;
+//     }
+// }
+
+@use 'base';
+@use 'mixins';
+
+%flexer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container {
+    @extend %flexer;
+
+    .box {
+        @include mixins.cuadrar(200);
+        padding: 20px;
+        margin: 0 30px 30px 0;
+        background-color: base.$light-blue;
+
+        &:nth-child(even) {
+            background-color: base.$light-green;
+
+            .title {
+                background-color: base.$light-blue;
+            }
+        }
+
+        &:nth-child(odd) {
+            .title {
+                color: base.$light-blue;
+            }
+        }
+
+        .title {
+            margin: 0;
+            background-color: base.$light-green;
+            width: fit-content;
+            padding: 12px;
+            margin: 0 0 12px 0;
+        }
+
+        .desc {
+            @extend %flexer;
+            padding: 12px;
+            height: 120px;
+            background-color: base.$primary-color;
+        }
+    }
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        //Prototipo
+        function Hombre(nombre, apellido, edad){
+            this.nombre=nombre;
+            this.apellido=apellido;
+            this.edad=edad;
+        }
+
+        function Sexo(nombre,apellido,edad,sexo){
+            this.super=Hombre;
+            this.nombre=nombre;
+            this.apellido=apellido;
+            this.edad=edad;
+            this.sexo=sexo;
+        }
+
+        Sexo.prototype= new Hombre();
+        Sexo.prototype.constructor = Sexo;
+        
+
+        const persona = new Hombre("Josue","Dominguez",17);
+        const persona2 = new Sexo("Piero","Alva",21,"Masculino")
+        console.log(persona);
+        console.log(persona2);
+    </script>
+</body>
+</html>

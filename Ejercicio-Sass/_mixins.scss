@@ -1,0 +1,4 @@
+@mixin cuadrar($large) {
+    width: $large + px;
+    height: $large + px;
+}

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Asincronia en JavaScript</h1>
+
+    <script>
+
+        // console.log("Inicio")
+
+        // setTimeout(() => {
+        //     console.log("Ejecutando un SetTimeof esto se puede ejecutar solo una vez");
+        // }, 3000);
+
+
+        // setInterval(() => {
+        //     console.log("Ejecutando un SetInterval esto se puede ejecuta indefinidamente cada intervao de tiempo");
+        // }, 1000);
+
+
+            // let temporizador = setTimeout(() => {
+            //    console.log(new Date().toLocaleTimeString())
+            // }, 1000);
+
+
+            // clearTimeout(temporizador);
+            // console.log("Despues del clear timeout")
+
+
+
+            // let temporizador = setInterval(() => {
+            //     console.log(new Date().toLocaleTimeString())
+            // }, interval);
+
+            // clearInterval(temporizador);
+
+            // console.log("Despues del clear Interval")
+
+
+
+
+            //  ASINCRONIA Y EL EVENT LOOP
+
+
+            /* Antes de explicar comofunciona el modelo de
+            JavaScript es importante entender algunos conceptos*/
+
+            // 1. Procesamiento Single thread y Multi thead
+
+            // (() =>{
+            //     console.log("Código Sincrono");
+            //     console.log("Inicio");
+
+            //     function dos() {
+            //         console.log("Dos")
+            //     }
+
+            //     function uno(){
+            //         console.log("Uno");
+            //         dos();
+            //         console.log("Tres");
+            //     }
+
+            //     uno();
+            //     console.log("Fin");
+            //     console.log("********************************************************************");
+            // })
+            // ();
+
+            // 2. Codigo Asincrono no bloqueante
+
+            // (() =>{
+            //     console.log("Código Asincrono");
+            //     console.log("Inicio");
+
+            //     function dos() {
+            //         setTimeout(function (){
+            //             console.log("Dos");
+            //         },1000)
+            //     }
+
+            //     function uno(){
+            //         setTimeout(function (){
+            //             console.log("Uno");
+            //         },0)
+            //         dos();
+            //         console.log("Tres");
+            //     }
+
+            //     uno();
+            //     console.log("Fin");
+            // })
+            // ();
+
+
+                //  CALLBACKS
+
+                //  function cuadradoCallbak(value, callback) {
+                //      setTimeout(() => {
+                //         callback(value, value*value)
+                //     }, 0 | Math.random()*100);
+                //  }
+
+                //  cuadradoCallbak(0,(value,result)=>{
+                //      console.log("Inicia Callback");
+                //      console.log(`Callback, ${value}, ${result}`)
+                //  });
+
+
+            // Si me olvido que es una callback ver este video  "https://www.youtube.com/watch?v=zQVnDW8SaA0"
+
+            // La callback es una funcion que garantiza que un codigo nose ejecuta hasta que otro no se halla ejecutado
+
+                // function saludar(nombre) {
+                //     alert('Hola ' + nombre);
+                // }
+
+                // function procesarEntradaUsuario(callback) {
+                //      let nombre = prompt('Por favor ingresa tu nombre.');
+                //     callback(nombre);
+                // }
+
+                // procesarEntradaUsuario(saludar);
+
+
+                // -----------1
+
+                // function primero() {
+                //     console.log("Primero");
+                // }
+
+                // function segundo() {
+                //     console.log("Segundo");
+                // }
+
+                // primero();
+                // segundo();
+
+
+
+                // -----------2
+                // function primero() {
+                //     setTimeout(() => {
+                //     console.log("Primero");
+                //     }, 3000);
+
+                // }
+
+                // function segundo() {
+                //     console.log("Segundo");
+                // }
+
+                // primero();
+                // segundo();
+
+                //-----3 con callback
+            //EN VEZ DE CALLBACK PUEDE IR SEGUNDO COMO PARAMETRO
+
+                // function primero(callback) {
+                //     setTimeout(() => {
+                //     console.log("Primero");
+                //     callback();
+                //     }, 3000);
+
+                // }
+
+                // function segundo() {
+                //     console.log("Segundo");
+                // }
+
+                // primero(segundo)
+
+
+                //Spread Operator
+
+                //Enviar elementos a una funcion de manera mas rapida posible
+
+                    let num = [1,2,3,4];
+                    let Strin = ["Josue", "Alonso","Marta","Maria"];
+
+                    const juntar = (a,b,c,d) =>{
+                        console.log(a+b+c+d);
+                    }
+
+                    // juntar(...num);
+
+                    // console.log(...num);
+
+                //Añadir array a otro array
+
+
+                    let users = ['Javier','David','Rosa','Juan','Mercedes'];
+                    let newUsers = ['Marta','Jaime','Laura'];
+
+                    users.push(...newUsers);
+                     // users.unshift(...newUsers);
+                    // users.splice(2,0,...newUsers);
+
+                    // console.log(users)
+
+
+                 //Copiar Arrays
+                 
+                    //  let arr1 = [1,2,3,4];
+                    //  let arr2 = [...arr1];
+
+                    //  console.log(arr2);
+
+                 //Concatenar arrays
+
+
+                 let arr1 = [1,2,3,4];
+                 let arr2 = [5,6,7];
+
+                //  let arrConcat = arr1.concat(arr2);
+                 
+                 let arrConcat = [...arr1,...arr2];
+                 console.log(arrConcat);
+
+                // Enviar un numero indefinido de argumento a una funcion (Parametros REST)
+
+                const restParms = (...numbers) =>{
+                    console.log(numbers);
+                }
+
+                restParms(1,2,3,4,5,6,7);
+
+                //Libreria Math
+
+                let numeros = [1,2,3,4,5,6,7,8,9,10,10,1,2,3,4]
+
+                    // console.log(Math.max(1,2,3));
+                console.log(Math.max(...numeros));
+
+
+                //Eliminar elemento repetido
+
+                console.log([...new Set(numeros)]);
+    </script>
+
+</body>
+</html>
